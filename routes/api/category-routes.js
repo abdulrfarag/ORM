@@ -14,12 +14,11 @@ router.get("/", async (req, res) => {
     res.status(500).json(err);
   }
 });
-// be sure to include its associated Products
+
 
 router.get("/:id", async (req, res) => {
   try {
     const categoryData = await Category.findByPk(req.params.id, {
-      // JOIN with category, using the Trip through table
       include: [Product],
     });
 
@@ -46,14 +45,14 @@ router.post('/', async (req, res) => {
 
 
 router.put("/:id", (req, res) => {
-  // update a category by its `id` value
+ 
   Category.create(req.body)
     .then((category) => res.status(200).json(category))
     .catch((err) => res.status(400).json(err));
 });
 
 router.delete("/:id", async (req, res) => {
-  // delete a category by its `id` value
+  
   try {
     const categoryData = await Category.destroy({
       where: {
